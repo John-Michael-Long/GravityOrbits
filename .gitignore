@@ -1,3 +1,9 @@
+#Mac OS
+.DS_store
+
+##npm default
+/public
+
 # Logs
 logs
 *.log

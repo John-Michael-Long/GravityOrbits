@@ -1,0 +1,28 @@
+.orbits-container {
+  height: 100%;
+  border: 5px solid red;
+  padding: 5px;
+}
+
+.top-menue-bar {
+  height: 20px;
+  border: 5px solid red;
+  padding: 5px;
+}
+
+.top-menu-bar {
+  height: 20px;
+  border: 5px solid red;
+  padding: 5px;
+}
+
+.space-container {
+  border: 5px solid red;
+  height: 800px;
+}
+
+.planet {
+  border:20px solid red;
+  border-radius:20px;
+  position:absolute;
+}
