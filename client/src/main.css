@@ -22,7 +22,7 @@
 }
 
 .planet {
-  border:20px solid red;
-  border-radius:20px;
+  border:10px solid red;
+  border-radius:10px;
   position:absolute;
 }
