@@ -16,14 +16,30 @@ class Planet extends React.Component {
 
   render() {
    // console.log('PROPS:',this.props)
+   let z_magnitude;
+    if(this.props.planetProps.z_position < -5000){
+      z_magnitude = 1
+    } else if(this.props.planetProps.z_position > 5000){
+      z_magnitude = 10000
+    } else {
+      z_magnitude = 5000 + this.props.planetProps.z_position;
+    }
+
+    let size = 10 + 200 * z_magnitude / 10000;
+
     const positionStyle = {
       left: this.props.planetProps.x_position,
-      top: this.props.planetProps.y_position
+      top: this.props.planetProps.y_position,
+      zIndex: z_magnitude,
+      height: size + 'px',
+      width: size + 'px'
     }
     return (
       <div className="planet" style={positionStyle}>
-      <div>Mass:{this.props.planetProps.mass}</div>
-      <div>Z:{this.props.planetProps.z_position}</div>
+      <div>size:{Math.round(size)}</div>
+      <div>X:{Math.round(this.props.planetProps.x_position)}</div>
+      <div>Y:{Math.round(this.props.planetProps.y_position)}</div>
+      <div>Z:{Math.round(this.props.planetProps.z_position)}</div>
       </div>
     );
   }
@@ -31,6 +47,9 @@ class Planet extends React.Component {
 
 export default Planet;
 
+
+  //<div>Mass:{this.props.planetProps.mass}</div>
+  //<div>Z:{Math.round(this.props.planetProps.z_position)}</div>
 //{top: this.positionY, left: this.positionX}
 
 // function calculateDistance() {

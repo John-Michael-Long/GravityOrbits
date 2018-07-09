@@ -1,18 +1,19 @@
 import React from 'react';
 import TopMenuBar from './TopMenuBar.jsx';
 import SpaceContainer from './SpaceContainer.jsx';
-
+import CreatePlanetForm from './CreatePlanetForm.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      planetFormIsHidden: true,
       planetProperties: [
         {
           mass: 2000,
           x_position: 2500,
           y_position: 200,
-          z_position: -2000,
+          z_position: -200,
           p_x: -500000,
           p_y: 0,
           p_z: 1000
@@ -24,14 +25,14 @@ class App extends React.Component {
           z_position: 0,
           p_x: 20000,
           p_y: -100,
-          p_z: -100000
+          p_z: -10000
         },
         {
           mass: 4000,
           x_position: 200,
-          y_position: 1400,
-          z_position: 2000,
-          p_x: 1500000,
+          y_position: 1500,
+          z_position: 200,
+          p_x: 150000,
           p_y: 200,
           p_z: 200000
         },
@@ -39,13 +40,37 @@ class App extends React.Component {
           mass: 8000,
           x_position: 2000,
           y_position: 1700,
-          z_position: 4000,
+          z_position: 400,
           p_x: 1500000,
           p_y: 200,
           p_z: 200000
         },
       ]
     };
+
+    this.handleCreatePlanetClick = this.handleCreatePlanetClick.bind(this)
+    this.handleCreatePlanetInput = this.handleCreatePlanetInput.bind(this)
+  }
+
+  handleCreatePlanetClick(){
+    console.log('clicked handleCreatePlanetClick');
+    //display input form
+    let value = this.state.planetFormIsHidden;
+    this.setState({
+      planetFormIsHidden: !value
+    })
+    
+  }
+
+  handleCreatePlanetInput(newPlanet){
+    console.log('clicked handleCreatePlanetInput:', newPlanet);
+    //push input data to planet properties
+    let planets = this.state.planetProperties;
+    planets.push(newPlanet)
+    this.setState({
+      planetProperties: planets,
+      planetFormIsHidden: true
+    })
   }
 
   componentDidMount(){
@@ -53,8 +78,6 @@ class App extends React.Component {
   }
 
   timestep() {
-    console.log('entered timestep')
-    
     //const updateAllPlanets = current => {
     for(let i = 0; i < this.state.planetProperties.length; i++)
       for(let j = 0; j < this.state.planetProperties.length; j++) {
@@ -118,23 +141,23 @@ class App extends React.Component {
     planet.y_position += delta_y;
     planet.z_position += delta_z;
 
-    console.log('currentPlanet:', planet1)
-    console.log('comparisonPlanet:', planet2)
-    console.log('x_unit:', x_unit)
-    console.log('y_unit:', y_unit)
-    console.log('z_unit:', z_unit)
-    console.log('x_dist:', x_dist)
-    console.log('y_dist:', y_dist)
-    console.log('z_dist:', z_dist)
-    console.log('force_x:', force_x)
-    console.log('force_y:', force_y)
-    console.log('force_z:', force_z)
-    console.log('p_2x:', planet.p_x)
-    console.log('p_2y:', planet.p_y)
-    console.log('p_2z:', planet.p_z)
-    console.log('delta_x:', delta_x)
-    console.log('delta_y:', delta_y)
-    console.log('delta_z:', delta_z)
+    // console.log('currentPlanet:', planet1)
+    // console.log('planetProperties:', this.state.planetProperties)
+    // console.log('x_unit:', x_unit)
+    // console.log('y_unit:', y_unit)
+    // console.log('z_unit:', z_unit)
+    // console.log('x_dist:', x_dist)
+    // console.log('y_dist:', y_dist)
+    // console.log('z_dist:', z_dist)
+    // console.log('force_x:', force_x)
+    // console.log('force_y:', force_y)
+    // console.log('force_z:', force_z)
+    // console.log('p_2x:', planet.p_x)
+    // console.log('p_2y:', planet.p_y)
+    // console.log('p_2z:', planet.p_z)
+    // console.log('delta_x:', delta_x)
+    // console.log('delta_y:', delta_y)
+    // console.log('delta_z:', delta_z)
 
     planets[planet1] = planet;
 
@@ -146,7 +169,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="orbits-container">
-        <TopMenuBar />
+        <TopMenuBar 
+          handleCreatePlanetClick={this.handleCreatePlanetClick}
+          handleCreatePlanetInput={this.handleCreatePlanetInput}
+          planetFormIsHidden={this.state.planetFormIsHidden}
+        />
         <SpaceContainer planetProperties={this.state.planetProperties} />
       </div>
     );
