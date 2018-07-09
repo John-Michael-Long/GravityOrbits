@@ -22,6 +22,8 @@ class Planet extends React.Component {
     }
     return (
       <div className="planet" style={positionStyle}>
+      <div>Mass:{this.props.planetProps.mass}</div>
+      <div>Z:{this.props.planetProps.z_position}</div>
       </div>
     );
   }

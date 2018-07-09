@@ -1,5 +1,10 @@
+html, body {
+  height:100vh; 
+  width:100vw;
+}
+
 .orbits-container {
-  height: 100%;
+  height: 100vh;
   border: 5px solid red;
   padding: 5px;
 }
@@ -18,11 +23,11 @@
 
 .space-container {
   border: 5px solid red;
-  height: 800px;
+  zoom: 40%;
 }
 
 .planet {
-  border:10px solid red;
-  border-radius:10px;
+  border: 10px solid red;
+  border-radius: 10px;
   position:absolute;
 }
