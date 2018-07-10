@@ -25,7 +25,7 @@ class Planet extends React.Component {
       z_magnitude = 5000 + this.props.planetProps.z_position;
     }
 
-    let size = (200 * z_magnitude / 10000) + 10 //* this.props.planetProps.mass/2000;
+    let size = (200 * z_magnitude / 10000) + 10 * this.props.planetProps.mass/2000;
 
     const positionStyle = {
       left: this.props.planetProps.x_position,

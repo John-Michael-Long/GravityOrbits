@@ -108,13 +108,13 @@ class App extends React.Component {
 
   timestep() {
     //const updateAllPlanets = current => {
-    for(let i = 0; i < this.state.planetProperties.length; i++)
+    for(let i = 0; i < this.state.planetProperties.length; i++) {
       for(let j = 0; j < this.state.planetProperties.length; j++) {
         if (j !== i) {
           this.updatePostition(j, i);
         }
       }
-    //}
+    }
     setTimeout(this.timestep.bind(this, 10), 10);
   }
 
@@ -139,6 +139,8 @@ class App extends React.Component {
     let force = magnitude * this.state.planetProperties[planet1].mass * this.state.planetProperties[planet2].mass / Math.pow(r_dist, 2)
     return force;
   }
+
+  //sumForces()
 
   updatePostition(planet1, planet2) {
     let xyz_dist = this.calculateDistance(planet1, planet2);
