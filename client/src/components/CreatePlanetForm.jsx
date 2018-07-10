@@ -31,14 +31,16 @@ class CreatePlanetForm extends React.Component {
     event.preventDefault();
 
     const minPosition = 10;
-    const maxPosition = 2000;
+    const maxPositionX = 3000//window.innerWidth;
+    const maxPositionY = 1500//window.innerHeight;
+    const maxPositionZ = 10000
     const minMomentum = 1000;
     const maxMomentum = 1000000;
     let newPlanet = {
       mass: this.state.mass === "" ? 1000 + Math.floor(Math.random() * 19000) : this.state.mass,
-      x_position: this.state.x_position === "" ? minPosition + Math.floor(Math.random() * maxPosition) : this.state.x_position,
-      y_position: this.state.y_position === "" ? minPosition + Math.floor(Math.random() * maxPosition) : this.state.y_position,
-      z_position: this.state.z_position === "" ? minPosition + Math.floor(Math.random() * maxPosition) : this.state.z_position,
+      x_position: this.state.x_position === "" ? minPosition + Math.floor(Math.random() * maxPositionX) : this.state.x_position,
+      y_position: this.state.y_position === "" ? minPosition + Math.floor(Math.random() * maxPositionY) : this.state.y_position,
+      z_position: this.state.z_position === "" ? minPosition + Math.floor(Math.random() * maxPositionZ) : this.state.z_position,
       p_x: this.state.p_x === "" ? minMomentum + Math.floor(Math.random() * maxMomentum) : this.state.p_x,
       p_y: this.state.p_y === "" ? minMomentum + Math.floor(Math.random() * maxMomentum) : this.state.p_y,
       p_z: this.state.p_z === "" ? minMomentum + Math.floor(Math.random() * maxMomentum) : this.state.p_z,

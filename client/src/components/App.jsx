@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import TopMenuBar from './TopMenuBar.jsx';
 import SpaceContainer from './SpaceContainer.jsx';
 import CreatePlanetForm from './CreatePlanetForm.jsx';
@@ -8,6 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       planetFormIsHidden: true,
+      saveFormIsHidden: true,
       planetProperties: [
         {
           mass: 2000,
@@ -50,6 +52,33 @@ class App extends React.Component {
 
     this.handleCreatePlanetClick = this.handleCreatePlanetClick.bind(this)
     this.handleCreatePlanetInput = this.handleCreatePlanetInput.bind(this)
+    this.handleSaveClick = this.handleSaveClick.bind(this)
+    this.handleSaveSubmit = this.handleSaveSubmit.bind(this)
+  }
+
+  handleSaveSubmit(username, password) {
+    axios.post('/savedgames', {
+      username: username,
+      password: password,
+      planetProperties: this.state.planetProperties
+    })
+    .then( res => {
+      console.log('server response:', res.data)
+    })
+    .catch( err => {
+      console.log('server err:', err)
+    })
+    this.setState({
+      saveFormIsHidden: true
+    })
+  }
+
+  handleSaveClick() {
+    console.log('entered handleSaveClick')
+    let value = this.state.saveFormIsHidden;
+    this.setState({
+      saveFormIsHidden: !value
+    })
   }
 
   handleCreatePlanetClick(){
@@ -141,6 +170,26 @@ class App extends React.Component {
     planet.y_position += delta_y;
     planet.z_position += delta_z;
 
+    console.log('window.innerWidth:', window.innerWidth)
+    console.log('window.innerHeight:', window.innerHeight)
+
+    // if(planet.x_position > window.innerWidth){
+    //   planet.x_position = 0;
+    // }
+    // if(planet.y_position > window.innerHeight){
+    //   planet.y_position = 0;
+    // }
+    // if(planet.z_position > 10000 || planet.z_position < -10000){
+    //   planet.z_position = 0;
+    // }
+    // if(planet.x_position < 0){
+    //   planet.x_position = window.innerWidth;
+    // }
+    // if(planet.y_position < 0){
+    //   planet.y_position = window.innerHeight;
+    // }
+
+
     // console.log('currentPlanet:', planet1)
     // console.log('planetProperties:', this.state.planetProperties)
     // console.log('x_unit:', x_unit)
@@ -172,7 +221,10 @@ class App extends React.Component {
         <TopMenuBar 
           handleCreatePlanetClick={this.handleCreatePlanetClick}
           handleCreatePlanetInput={this.handleCreatePlanetInput}
+          handleSaveClick={this.handleSaveClick}
+          handleSaveSubmit={this.handleSaveSubmit}
           planetFormIsHidden={this.state.planetFormIsHidden}
+          saveFormIsHidden={this.state.saveFormIsHidden}
         />
         <SpaceContainer planetProperties={this.state.planetProperties} />
       </div>
